@@ -18,37 +18,6 @@
             <option value="창조관">창조관</option>
             <option value="미래관">미래관</option>
         </select>
-        <select id="startTime">
-            <option value="09:00">09:00</option>
-            <option value="10:00">10:00</option>
-            <option value="11:00">11:00</option>
-            <option value="12:00">12:00</option>
-            <option value="13:00">13:00</option>
-            <option value="14:00">14:00</option>
-            <option value="15:00">15:00</option>
-            <option value="16:00">16:00</option>
-            <option value="17:00">17:00</option>
-            <option value="18:00">18:00</option>
-            <option value="19:00">19:00</option>
-            <option value="20:00">20:00</option>
-            <option value="21:00">21:00</option>
-        </select>
-        <span>~</span>
-        <select id="endTime">
-            <option value="10:00">10:00</option>
-            <option value="11:00">11:00</option>
-            <option value="12:00">12:00</option>
-            <option value="13:00">13:00</option>
-            <option value="14:00">14:00</option>
-            <option value="15:00">15:00</option>
-            <option value="16:00">16:00</option>
-            <option value="17:00">17:00</option>
-            <option value="18:00">18:00</option>
-            <option value="19:00">19:00</option>
-            <option value="20:00">20:00</option>
-            <option value="21:00">21:00</option>
-            <option value="22:00">22:00</option>
-        </select>
         <button id="searchBtn">검색</button>
     </div>
 
@@ -67,6 +36,43 @@
         </tbody>
     </table>
 </div>
+
+<!--강의실 팝업창-->
+<div class="container">
+    <div id="room-popup" class="popup" style="display: none;">
+        <div class="popup-content">
+            <button class="popup-close" onclick="closePopup('room-popup')">×</button>
+
+            <h3 id="popup-roomName">강의실명</h3>
+            <div class="info-grid">
+                <p><strong>건물명:</strong> <span id="popup-building"></span></p>
+                <p><strong>층수:</strong> <span id="popup-floor"></span></p>
+                <p><strong>정원:</strong> <span id="popup-capacity"></span></p>
+                <p><strong>이용 가능 시간:</strong> <span id="popup-time"></span></p>
+            </div>
+
+            <div class="timetable-section">
+                <h4>주간 시간표</h4>
+                <div class="timetable-container">
+                    <div class="timetable-header">
+                        <div class="time-label"></div>
+                        <div class="day" data-day="MON">월</div>
+                        <div class="day" data-day="TUE">화</div>
+                        <div class="day" data-day="WED">수</div>
+                        <div class="day" data-day="THU">목</div>
+                        <div class="day" data-day="FRI">금</div>
+                        <div class="day" data-day="SAT">토</div>
+                        <div class="day" data-day="SUN">일</div>
+                    </div>
+                    <div class="timetable-body">
+                        <div class="timetable-grid" id="timetable-grid"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <script th:src="@{/js/participate.js}"></script>
 
