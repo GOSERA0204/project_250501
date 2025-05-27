@@ -44,12 +44,16 @@
             <button class="popup-close" onclick="closePopup('room-popup')">×</button>
 
             <h3 id="popup-roomName">강의실명</h3>
+
             <div class="info-grid">
                 <p><strong>건물명:</strong> <span id="popup-building"></span></p>
                 <p><strong>층수:</strong> <span id="popup-floor"></span></p>
                 <p><strong>정원:</strong> <span id="popup-capacity"></span></p>
                 <p><strong>이용 가능 시간:</strong> <span id="popup-time"></span></p>
             </div>
+
+            <!-- ✅ 여기에 해시태그 버튼들이 들어감 -->
+            <div id="popup-hashtags" class="hashtag-container"></div>
 
             <div class="timetable-section">
                 <h4>주간 시간표</h4>
@@ -72,7 +76,6 @@
         </div>
     </div>
 </div>
-
 
 <script th:src="@{/js/participate.js}"></script>
 
