@@ -1,0 +1,126 @@
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:replace="fragments/fixture :: head('강의실 현황')" />
+</head>
+<body>
+<div th:replace="fragments/fixture :: headerAndNav"></div>
+
+<div class="container">
+    <h2>강의실 현황</h2>
+    <div class="filters">
+        <input type="date" id="date">
+        <select id="facility">
+            <option disabled selected>시설 선택</option>
+            <option value="정의관">정의관</option>
+            <option value="청송관">청송관</option>
+            <option value="컨버전스홀">컨버전스홀</option>
+            <option value="창조관">창조관</option>
+            <option value="미래관">미래관</option>
+        </select>
+        <button id="searchBtn">검색</button>
+    </div>
+
+    <table id="resultTable">
+        <thead>
+        <tr>
+            <th>건물명</th>
+            <th>층수</th>
+            <th>강의실명</th>
+            <th>정원</th>
+            <th>참여 가능 시간</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- JS로 데이터 삽입 -->
+        </tbody>
+    </table>
+</div>
+
+<!--강의실 팝업창-->
+
+    <div id="room-popup" class="popup-overlay" style="">
+        <div class="popup-container">
+            <button class="popup-close" onclick="closePopup('room-popup')">×</button>
+
+            <div class="popup-content-two-column">
+                <div class="room-info">
+                    <h3>강의실 정보</h3>
+                    <div class="info-grid">
+                        <p><strong>강의실명:</strong> <span id="popup-lecture"></span></p>
+                        <p><strong>건물명:</strong> <span id="popup-building"></span></p>
+                        <p><strong>층수:</strong> <span id="popup-floor"></span></p>
+                        <p><strong>정원:</strong> <span id="popup-capacity"></span></p>
+                        <p><strong>이용 가능 시간:</strong> <span id="popup-time"></span></p>
+                    </div>
+
+                    <!-- 여기에 해시태그 버튼들이 들어감 -->
+                    <div id="popup-hashtags" class="hashtag-container">
+                    </div>
+                    <div class="lecture-map">
+                        <img src="/lecture_map.png" alt="강의실지도">
+                    </div>
+                </div>
+                <div class="timetable-wrapper">
+                    <h3>강의실 시간표</h3>
+                    <div class="timetable-header">
+                        <div class="time-label"></div>
+                        <div class="day" data-day="MON">월</div>
+                        <div class="day" data-day="TUE">화</div>
+                        <div class="day" data-day="WED">수</div>
+                        <div class="day" data-day="THU">목</div>
+                        <div class="day" data-day="FRI">금</div>
+                        <div class="day" data-day="SAT">토</div>
+                        <div class="day" data-day="SUN">일</div>
+                    </div>
+                    <div class="timetable-body">
+                        <div class="timetable-grid" id="timetable-grid"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="popup-actions">
+                <button class="popup-button" onclick="switchToParticipatePopup()">참여하기</button>
+            </div>
+        </div>
+    </div>
+
+
+
+<!-- 참여하기 팝업 -->
+<div id="participate-popup" class="popup-overlay" style="display: none;">
+    <div class="participate-popup">
+        <h3>참여 정보 입력</h3>
+        <p><strong>건물:</strong> <span id="participate-building"></span></p>
+        <p><strong>강의실명:</strong> <span id="participate-roomName"></span></p>
+
+        <label for="participate-time">참여 시간:</label>
+        <input type="time" id="participate-time" step="3600">
+
+        <label for="participate-count">참여 인원:</label>
+        <select id="participate-count">
+            <option value="1">1명</option>
+            <option value="2">2명</option>
+            <option value="3">3명</option>
+            <option value="4">4명 이상</option>
+        </select>
+
+        <p>분위기 해시태그를 선택해 주세요:</p>
+        <div id="hashtags">
+            <label><input type="checkbox" value="#혼자 개인 공부해요"> 혼자 개인 공부해요</label><br>
+            <label><input type="checkbox" value="#여럿이서 회의해요"> 여럿이서 회의해요</label><br>
+            <label><input type="checkbox" value="#조용하게 있어요"> 조용하게 있어요</label><br>
+            <label><input type="checkbox" value="#자유롭게 대화해요"> 자유롭게 대화해요</label><br>
+            <label><input type="checkbox" value="#아주 잠깐 머물러요"> 아주 잠깐 머물러요</label><br>
+            <label><input type="checkbox" value="#편하게 있어요"> 편하게 있어요</label><br>
+        </div>
+
+        <div class="popup-actions">
+            <button onclick="closePopup('participate-popup')">닫기</button>
+            <button onclick="submitParticipation()">제출</button>
+        </div>
+    </div>
+</div>
+
+
+<script th:src="@{/js/participate.js}"></script>
+</body>
+</html>

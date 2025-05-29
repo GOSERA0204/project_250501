@@ -27,7 +27,7 @@ h2 {
 .filters select,
 .filters button {
   padding: 0.4rem;
-  border: 1px solid #ccc;
+  border: 1px solidsql #ccc;
   border-radius: 5px;
   font-size: 0.9rem;
 }
@@ -49,141 +49,136 @@ th {
   color: #333;
 }
 
-//강의실 상세 팝업 레이아웃
-.popup {
+* 팝업 전체 오버레이 */
+.popup-overlay {
   position: fixed;
   top: 0;
-  left: 0;
+  left: 2vw; /* 살짝 오른쪽으로 이동 */
   width: 100vw;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.4);
-  display: flex;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none; /* openPopup()에서 display: flex 설정 */
   justify-content: center;
   align-items: center;
-  z-index: 2000;
+  z-index: 9999; /* 사이드바, 헤더보다 위 */
 }
 
-.popup-content {
-  background: white;
+/* 팝업 박스 */
+.popup-container {
+  margin: auto;
+  background-color: white;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 1000px;
   padding: 24px;
-  border-radius: 12px;
-  width: 600px;
-  max-height: 90vh;
-  overflow-y: auto;
   position: relative;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-}
-
-.popup-close {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  font-size: 24px;
-  border: none;
-  background: none;
-  cursor: pointer;
-  color: #999;
-}
-
-.popup-button {
-  margin-top: 20px;
-  background-color: #0d3c75;
-  color: white;
-  padding: 12px 24px;
-  border-radius: 8px;
-  border: none;
-  font-size: 14px;
-  font-weight: bold;
-  cursor: pointer;
-  width: 100%;
-}
-
-//해시태그 영역
-.hashtag-container {
-  margin-top: 1rem;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-}
-
-.hashtag-btn {
-  background-color: #f0f0f0;
-  color: #333;
-  font-size: 12px;
-  border: none;
-  border-radius: 20px;
-  padding: 6px 12px;
-  cursor: default;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-}
-
-//시간표 시각화
-.timetable-container {
   display: flex;
   flex-direction: column;
-  border: 1px solid #ccc;
-  margin-top: 1.2rem;
-  font-family: sans-serif;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  z-index: 10000;
+}
+
+/* 팝업 닫기 버튼 */
+.popup-close {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  font-size: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 10001;
+}
+
+/* 2열 구조 */
+.popup-content-two-column {
+  display: flex;
+  gap: 40px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+
+/* 왼쪽 정보 영역 */
+.room-info {
+  flex: 1;
+  min-width: 300px;
+}
+
+.info-grid p {
+  margin: 4px 0;
+  font-size: 14px;
+}
+
+/* 해시태그 버튼 */
+.hashtag-container {
+  margin: 10px 0;
+}
+.hashtag-container button {
+  margin: 4px 4px 4px 0;
+  background-color: #f0f0f0;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  cursor: default;
+}
+
+/* 강의실 지도 */
+.lecture-map img {
+  width: 100%;
+  max-width: 300px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-top: 10px;
+}
+
+/* 오른쪽 시간표 */
+.timetable-wrapper {
+  flex: 1.5;
+  min-width: 400px;
 }
 
 .timetable-header {
   display: grid;
-  grid-template-columns: 80px repeat(7, 1fr);
-  background-color: #f3f3f3;
-  text-align: center;
+  grid-template-columns: 60px repeat(7, 1fr);
+  background-color: #f8f8f8;
+  height: 40px;
   font-weight: bold;
-  border-bottom: 1px solid #ccc;
-}
-
-.timetable-body {
-  position: relative;
-  height: 650px;
-  border-top: 1px solid #ccc;
+  text-align: center;
+  line-height: 40px;
 }
 
 .timetable-grid {
   display: grid;
-  grid-template-columns: 80px repeat(7, 1fr);
-  grid-template-rows: repeat(13, 50px);
-  position: relative;
+  grid-template-columns: 60px repeat(7, 1fr);
+  grid-template-rows: repeat(13, 40px); /* 9시~21시 */
 }
 
-.time-label {
+.timetable-cell {
+  border: 1px solid #ddd;
   font-size: 12px;
-  color: #555;
+  padding: 4px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.timetable-time {
+  background-color: #f0f0f0;
+  font-weight: bold;
+}
+
+/* 참여하기 버튼 */
+.popup-actions {
+  margin-top: 20px;
   display: flex;
   justify-content: center;
-  align-items: center;
-  height: 50px;
-  border-right: 1px solid #ddd;
 }
-
-.timetable-grid > div {
-  border: 1px solid #eee;
-}
-
-.timetable-block {
-  position: absolute;
-  background-color: #cde6ff;
-  border: 1px solid #008cff;
-  color: #000;
-  font-size: 12px;
-  padding: 2px;
-  border-radius: 4px;
-  text-align: center;
-  overflow: hidden;
-  z-index: 10;
-}
-
-.available-block {
-  position: absolute;
-  background-color: #b8f5b1;
-  border: 1px solid #00b300;
-  color: #000;
-  font-size: 12px;
-  padding: 2px;
-  border-radius: 4px;
-  text-align: center;
-  opacity: 0.9;
-  z-index: 5;
+.popup-button {
+  background-color: #003366;
+  color: white;
+  padding: 10px 30px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
 }

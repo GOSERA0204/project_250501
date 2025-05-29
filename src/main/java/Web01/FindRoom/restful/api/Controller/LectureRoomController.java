@@ -20,7 +20,6 @@ public class LectureRoomController {
     @Autowired
     private LectureRoomService lectureRoomService;
 
-    //빈 강의실 검색
     @GetMapping("/search")
     public ResponseEntity<APIResponseDTO<LectureRoomDTO>> search(@RequestParam String building,
                                                                  @RequestParam String weekday,
@@ -37,7 +36,6 @@ public class LectureRoomController {
         }
     }
 
-    //강의실 상세정보 조회
     @GetMapping("/select")
     public ResponseEntity<APIResponseDTO<LectureRoomDTO>> select(@RequestParam String building,
                                                                  @RequestParam String classId) {
